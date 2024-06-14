@@ -1,0 +1,9 @@
+# ninja log v6
+0	463	1718402032887036866	CMakeFiles/cpp_binary_tree.dir/main.cpp.o	26c6315d56db6373
+464	497	1718402033351188080	cpp_binary_tree	27ce509372005577
+5	517	1718402488258602104	CMakeFiles/cpp_binary_tree.dir/BinaryTree.cpp.o	dd8d22a80c20a36c
+4	517	1718402488257718585	CMakeFiles/cpp_binary_tree.dir/main.cpp.o	26c6315d56db6373
+517	640	1718402488771386242	cpp_binary_tree	9147658c87c3e55c
+5	521	1718403433185945990	CMakeFiles/cpp_binary_tree.dir/BinaryTree.cpp.o	dd8d22a80c20a36c
+4	523	1718403433185138012	CMakeFiles/cpp_binary_tree.dir/main.cpp.o	26c6315d56db6373
+523	646	1718403433704212276	cpp_binary_tree	9147658c87c3e55c
