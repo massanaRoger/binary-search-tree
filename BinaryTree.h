@@ -16,6 +16,7 @@ namespace binary_tree {
         BinaryTree() = default;
         void Insert(size_t val);
         void Print();
+        bool Search(size_t val);
     private:
         Node* m_root;
     };
