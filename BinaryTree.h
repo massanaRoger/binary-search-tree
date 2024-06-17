@@ -20,6 +20,9 @@ namespace binary_tree {
         bool Delete(size_t val);
     private:
         Node* m_root;
+
+        Node* findLowestNode(Node* node);
+        void printHelper(Node* root, int space);
     };
 
 }

@@ -34,7 +34,24 @@ namespace binary_tree {
     }
 
     void BinaryTree::Print() {
-        std::cout << m_root->value << std::endl;
+        printHelper(m_root, 0);
+    }
+
+    void BinaryTree::printHelper(Node* root, int space) {
+        int COUNT = 10;
+        if (root == nullptr)
+            return;
+
+        space += COUNT;
+
+        printHelper(root->right, space);
+
+        std::cout << std::endl;
+        for (int i = COUNT; i < space; i++)
+            std::cout << " ";
+        std::cout << root->value << "\n";
+
+        printHelper(root->left, space);
     }
 
     Node* BinaryTree::Search(size_t val) {
@@ -60,6 +77,16 @@ namespace binary_tree {
         }
     }
 
+    Node* BinaryTree::findLowestNode(Node* node) {
+        if (node == nullptr)
+            return nullptr;
+        while (node->left) {
+            node = node->left;
+        }
+
+        return node;
+    }
+
     bool BinaryTree::Delete(size_t val) {
         Node* node = m_root;
         Node* nodeToDelete = Search(val);
@@ -80,26 +107,56 @@ namespace binary_tree {
                 }
                 node = node->right;
             } else {
+                    nodeToDelete = node;
                 break;
             }
         }
         if (!nodeToDelete->left && !nodeToDelete->right) {
-            delete nodeToDelete;
-            prevNode = nullptr;
+            if (node->left == nodeToDelete) {
+                delete node->left;
+                node->left = nullptr;
+            } else {
+                delete node->right;
+                node->right = nullptr;
+            }
             return true;
-        } else if (prevNode->left && !prevNode->right) {
-            Node* nodeToReplace = prevNode->left;
-            delete prevNode;
-            prevNode = nodeToReplace;
-        } else if (prevNode->right && !prevNode->left) {
-            Node* nodeToReplace = prevNode->right;
-            delete prevNode;
-            prevNode = nodeToReplace;
-        } else {
-
+        }
+        if (!nodeToDelete->left && nodeToDelete->right) {
+            if (node->left == nodeToDelete) {
+                Node* nodeToReplace = node->left->right;
+                delete node->left;
+                node->left = nodeToReplace;
+            } else {
+                Node* nodeToReplace = node->right->right;
+                delete node->right;
+                node->right = nodeToReplace;
+            }
+            return true;
+        }
+        if (nodeToDelete->left && !nodeToDelete->right) {
+            if (node->left == nodeToDelete) {
+                Node* nodeToReplace = node->left->left;
+                delete node->left;
+                node->left = nodeToReplace;
+            } else {
+                Node* nodeToReplace = node->right->left;
+                delete node->right;
+                node->right = nodeToReplace;
+            }
+            return true;
         }
 
+        if (node->left == nodeToDelete) {
+            Node* lowestNode = findLowestNode(node->left);
+            delete node->left;
+            node->left = lowestNode;
+        } else {
+            Node* lowestNode = findLowestNode(node->right);
+            delete node->right;
+            node->right = lowestNode;
+        }
 
+        return true;
     }
 
 }
